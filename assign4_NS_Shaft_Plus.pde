@@ -9,7 +9,7 @@ final int INVINCIBILITY_DURATION = 180; // 3 seconds at 60 FPS
 final int DAMAGE_BLINK_DURATION = 30;
 final int ANIMATION_INTERVAL = 10;
 final int FRAME_RATE = 60; // Frames per second
-final int WIN_MINIMUM_TIME = 10; // Time in seconds required to win
+final int WIN_MINIMUM_TIME = 60; // Time in seconds required to win
 final float SLIDE_SPEED = 5; // Speed at which the win image slides in
 final int GAME_RUN = 0, GAME_WIN = 1, GAME_OVER = 2; // Game states
 // Game Variables

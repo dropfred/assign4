@@ -6,7 +6,6 @@ class SpikyPlatform extends Platform {
     super(tempX, tempY);
   }
 
-
   void interact(Player player) {
     super.interact(player);
     if (!player.invincible && !player.damaged) {

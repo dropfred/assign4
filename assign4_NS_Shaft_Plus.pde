@@ -196,6 +196,7 @@ void winGame() {
   }
   displayWinMessage(); // Show a congratulatory message 
 }
+
 // Handles the end of the game
 void endGame() {
   player.forceDropToBottom(); // Allow the player to drop to the bottom of the screen

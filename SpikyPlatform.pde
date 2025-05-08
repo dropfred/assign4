@@ -8,9 +8,10 @@ class SpikyPlatform extends Platform {
 
   void interact(Player player) {
     super.interact(player);
-    if (!player.invincible && !player.damaged) {
+    if (!player.invincible && !player.damaged && damage != 0) {
       player.takeDamage(damage);
       playPlatformSound(); // Play the platform sound
+      damage = 0; // Damage only once
     }
   }
 

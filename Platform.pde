@@ -28,4 +28,11 @@ class Platform {
     image(platformImage, x, y, w, h); // Draw the platform
   }
 
+  // // Practice 4: Play the sound
+  // void playPlatformSound(SoundFile sound) {
+  //   if (!playedSound) {
+  //     sound.play();
+  //     playedSound = true;
+  //   }
+  // }
 }

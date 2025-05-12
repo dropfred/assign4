@@ -12,6 +12,8 @@ final int FRAME_RATE = 60; // Frames per second
 final int WIN_MINIMUM_TIME = 60; // Time in seconds required to win
 final float SLIDE_SPEED = 5; // Speed at which the win image slides in
 final int GAME_RUN = 0, GAME_WIN = 1, GAME_OVER = 2; // Game states
+final int WIN_ANIMATION_DURATIoN = 60; // 1 second at 60 FPS
+
 // Game Variables
 Platform[] platforms = new Platform[NUM_PLATFORMS]; // Array to store all platforms
 Player player; // The player object
@@ -38,6 +40,7 @@ SoundFile fragilePlatformSound; // Sound for fragile platform interaction
 SoundFile fragilePlatformBrokenSound; // Sound for broken fragile platform interaction
 SoundFile spikyPlatformSound; // Sound for spiky platform interaction
 SoundFile healSound; // Sound for healing
+int winAnimationTime;
 
 // Setup
 void setup() {
@@ -92,6 +95,7 @@ void initializeGame() {
   frameCounter = 0;
   gameState = GAME_RUN; // Set the initial game state to running
   winImageY = height; // Start the win image off-screen
+  winAnimationTime = 0;
 }
 
 void initializePlatforms() {
@@ -197,12 +201,21 @@ void winGame() {
   if (player.y < height - winImageHeight / 2) {
     player.display(); // Display the player on the screen
   } else {
-    float animation = sin(TWO_PI * (frameCount / 60.0));
-    float positionY = height - winImageHeight / 2 - player.h - 10 * animation;
-    float alpha = (animation + 1.0) / 2.0;
-    tint(255, (int)(255.0 * alpha));
-    image(friedImage, (width - player.w) / 2, positionY, player.w, player.h);
-    tint(255);
+    // Display extra win animation
+    pushMatrix();
+    float animation = map(winAnimationTime, 0, WIN_ANIMATION_DURATIoN, 0, 1);
+    translate(width / 2, height - winImageHeight / 2 + (pow((animation * 2 - 1), 2)  - 1) * 150);
+    scale(animation);
+    rotate(TWO_PI * animation * 4);
+    imageMode(CENTER);
+    // tint(255, (int)(255.0 * animation));
+    image(friedImage, 0, 0);
+    // tint(255);
+    imageMode(CORNER);
+    popMatrix();
+    if (winAnimationTime < WIN_ANIMATION_DURATIoN) {
+      winAnimationTime++;
+    }
   }
   displayWinMessage(); // Show a congratulatory message 
 }

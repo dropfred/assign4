@@ -11,9 +11,6 @@ class FragilePlatform extends Platform {
   void interact(Player player) {
     if (duration > 0) {
       super.interact(player);
-      if (duration == FRAGILE_PLATFORM_DURATION) {
-        fragilePlatformSound.play(); // Play the fragile platform sound  
-      }
       duration--;
       if (duration == 0) {
         fragilePlatformBrokenSound.play(); // Play the broken fragile platform sound  
@@ -25,5 +22,9 @@ class FragilePlatform extends Platform {
     // Use a different image for fragile platforms
     PImage image = (duration > 0) ? fragilePlatformImage : fragilePlatformBrokenImage;
     image(image, x, y, w, h);
+  }
+
+  void playPlatformSound() {
+    fragilePlatformSound.play(); // Play the fragile platform sound
   }
 }

@@ -21,18 +21,17 @@ class Platform {
     player.y -= speed; // Move the player up with the platform
     
     // Practice4: Avoid sound being repeatedly played
+    if (!playedSound) {
+      playPlatformSound();
+      playedSound = true;
+    }
+  }
 
+  void playPlatformSound() {
+    platformSound.play(); // Play the normal platform sound
   }
 
   void display() {
     image(platformImage, x, y, w, h); // Draw the platform
   }
-
-  // // Practice 4: Play the sound
-  // void playPlatformSound(SoundFile sound) {
-  //   if (!playedSound) {
-  //     sound.play();
-  //     playedSound = true;
-  //   }
-  // }
 }

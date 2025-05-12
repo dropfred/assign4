@@ -26,6 +26,7 @@ PImage fragilePlatformBrokenImage; // Image for broken fragile platforms
 PImage spikyPlatformImage; // Image for spiky platforms
 PImage healPotionImage; // Image for healing potions
 PImage winImage; // The image displayed when the player wins
+PImage friedImage; // Image for the player when fried
 float winImageY; // The vertical position of the win image
 float winImageHeight; // The height of the win image
 int survivalTime = 0; // Time the player has survived in seconds
@@ -80,6 +81,8 @@ void loadAssets() {
   fragilePlatformBrokenSound = new SoundFile(this, "fragile_broken.mp3");
   spikyPlatformSound = new SoundFile(this, "spiky.mp3");
   healSound = new SoundFile(this, "heal.mp3");
+
+  friedImage = loadImage("fried.png");
 }
 
 void initializeGame() {
@@ -193,6 +196,13 @@ void winGame() {
   player.forceDropToBottom(); // Allow the player to drop to the bottom of the screen
   if (player.y < height - winImageHeight / 2) {
     player.display(); // Display the player on the screen
+  } else {
+    float animation = sin(TWO_PI * (frameCount / 60.0));
+    float positionY = height - winImageHeight / 2 - player.h - 10 * animation;
+    float alpha = (animation + 1.0) / 2.0;
+    tint(255, (int)(255.0 * alpha));
+    image(friedImage, (width - player.w) / 2, positionY, player.w, player.h);
+    tint(255);
   }
   displayWinMessage(); // Show a congratulatory message 
 }
